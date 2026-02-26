@@ -22,7 +22,6 @@ use serenity::all::{
 use chrono::{Utc, Local, Duration, Timelike, Datelike, DateTime};
 use once_cell::sync::Lazy;
 use sqlx::{MySql, Pool, Row};
-use rand::Rng;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 use tokio::time::sleep;
