@@ -1366,15 +1366,6 @@ impl EventHandler for Handler {
                             }
                         }
                     }
-                }
-                else if upmsg.starts_with("러스토끼") && rand::random::<u32>() % 5 == 0 {
-                    let wrong_responses = ["누구 부르니?", "...잘못 부른 모양인데?", "그건 틀렸어", "나는 '끼'가 아니야"];
-                    let wrong_response = wrong_responses[rand::rng().random_range(0..wrong_responses.len())];
-
-                    if let Err(e) = msg.reply_ping(&ctx.http, wrong_response).await {
-                        eprintln!("[ERROR] RUSTOKI say(): {e:?}");
-                    }
-                    return;
                 } else if msg.content == "<?" {
                     if let Err(e) = msg.reply_ping(&ctx.http, "도움말은 아직 없어").await {
                         eprintln!("[ERROR]  <? reply_ping(): {e:?}");
@@ -3248,23 +3239,7 @@ Notes:
                                     if let Some(rsp) = get_response(&self.resp, &format!("<@{}>", command.user.id.get().to_string())).await {
                                         respstr = rsp;
                                     } else {
-                                        let unknown_responses = [
-                                            "은/는 DB에 없어",
-                                            "은/는 누군지 모르겠네",
-                                            "? 누구인지 모르겠어",
-                                            "(이)라... 누구지?",
-                                            "너는 누군지 몰라",
-                                            "누구세요?",
-                                        ];
-                                        let random_index = rand::rng().random_range(0..unknown_responses.len());
-                                        let selected_response = unknown_responses[random_index];
-                                        let formatted_response = if random_index < 4 {
-                                            format!("{}{}", command.user.name, selected_response)
-                                        } else {
-                                            selected_response.to_string()
-                                        };
-
-                                        respstr = formatted_response;
+                                        respstr = format!("{}{}", command.user.name, "은/는 DB에 없어");
                                     }
                                 } else {
                                     if let Some(rsp) = get_response(&self.resp, &message).await {
