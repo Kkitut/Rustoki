@@ -1,5 +1,5 @@
 use meval::eval_str;
-use rand::Rng;
+use rand::RngExt;
 use chrono::{Local, Utc, Timelike};
 use serenity::prelude::Context;
 use serenity::all::{CreateMessage, CreateAttachment, CreateEmbed, CreateInteractionResponseMessage};
